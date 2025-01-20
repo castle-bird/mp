@@ -93,6 +93,8 @@ const HeaderContainer = styled.header`
 
         // 햄버거
         .hamburger {
+            display: flex;
+            align-items: center;
             cursor: pointer;
 
             input {
