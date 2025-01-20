@@ -19,10 +19,12 @@ const Error404Container = styled.div`
     `)}
 
     h1 {
+        font-weight: 200;
         font-size: 4rem;
         color: ${properties.colors.white};
 
         span {
+            font-weight: 500;
             color: ${properties.colors.primary};
         }
     }
