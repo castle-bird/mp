@@ -1,14 +1,17 @@
 import { createRoot } from "react-dom/client";
-import App from "./App.jsx";
-
 import { BrowserRouter } from "react-router-dom";
+
+import { GitProvider } from "./hooks/GitContext.jsx";
 import Meta from "./global/Meta.jsx";
 import GlobalStyle from "./global/GlobalStyle.jsx";
+import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
-    <BrowserRouter>
-        <Meta />
-        <GlobalStyle />
-        <App />
-    </BrowserRouter>
+    <GitProvider>
+        <BrowserRouter>
+            <Meta />
+            <GlobalStyle />
+            <App />
+        </BrowserRouter>
+    </GitProvider>
 );
