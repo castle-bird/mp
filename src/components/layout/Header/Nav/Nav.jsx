@@ -20,7 +20,8 @@ export default function Nav() {
             if (currentNavItem) {
                 updateNavLine(currentNavItem);
             } else {
-                navLine.current.style.display = "none";
+                // 없는 페이지 로딩시 Home으로
+                updateNavLine(navItems.current[0])
             }
 
             // resize시 폰트크기가 달라져서 .line의 크기도 변경되어야 함

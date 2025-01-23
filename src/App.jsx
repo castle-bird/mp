@@ -8,11 +8,10 @@ import Home from "./components/pages/home/Home";
 import About from "./components/pages/about/About";
 import History from "./components/pages/history/History";
 
-const paths = ["/", "/about", "/history"];
-
+const paths = ["/", "/about", "/history", "/details/:id"];
 function App() {
     const location = useLocation();
-    const is404 = !paths.includes(location.pathname);
+    const is404 = !paths.some((path) => new RegExp(`^${path.replace(/:\w+/g, "\\w+")}$`).test(location.pathname));
 
     return (
         <div id="body-wrap">
@@ -22,6 +21,7 @@ function App() {
                     <Route path="/" element={<Home />} />
                     <Route path="/about" element={<About />} />
                     <Route path="/history" element={<History />} />
+                    <Route path="/details/:id" element={<Home />} />
                     <Route path="*" element={<Error404 />} />
                 </Routes>
             </main>
