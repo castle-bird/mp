@@ -5,16 +5,13 @@ import HomeContainer from "./Home_styled";
 import HomeList from "./HomeList/HomeList";
 import HomeView from "./HomeView/HomeView";
 
-
 export default function Home() {
     const { gitState } = useContext(GitContext);
 
     return (
         <HomeContainer>
-            {JSON.stringify(gitState)}
-            <HomeList />
-            <HomeView />
-            
+            <HomeList gitState={gitState} />
+            <HomeView gitState={gitState} />
         </HomeContainer>
     );
 }

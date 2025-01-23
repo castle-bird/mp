@@ -1,9 +1,28 @@
-import HomeListContainer from "./HomeList_styled"
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
-export default function HomeList() {
-    return(
+import HomeListContainer from "./HomeList_styled";
+
+export default function HomeList({ gitState: { loading, data, error } }) {
+    return (
         <HomeListContainer>
-            리스트
+            <ul>
+                <li>{data && <Link to={`/details/${data[0].id}`}>{data[0].title}</Link>}</li>
+            </ul>
         </HomeListContainer>
-    )
+    );
 }
+
+HomeList.propTypes = {
+    gitState: PropTypes.shape({
+        loading: PropTypes.bool,
+        data: PropTypes.oneOfType([
+            PropTypes.array, 
+            PropTypes.oneOf([null])
+        ]),
+        error: PropTypes.oneOfType([
+            PropTypes.bool, 
+            PropTypes.object
+        ]),
+    }),
+};
