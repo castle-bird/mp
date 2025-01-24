@@ -1,5 +1,7 @@
 import PropTypes from "prop-types";
-import { createContext, useReducer, useEffect } from "react";
+import { createContext, useReducer, useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
+
 import axios from "axios";
 
 async function getGitAPI() {
@@ -17,9 +19,7 @@ async function getGitAPI() {
     const decodedContent = new TextDecoder("utf-8").decode(Uint8Array.from(decodedBase64, (c) => c.charCodeAt(0)));
     const jsonData = JSON.parse(decodedContent);
 
-    
-
-    const sortedJsonData = jsonData.slice().sort((a,b) => new Date(b.timeline.start) - new Date(a.timeline.start));
+    const sortedJsonData = jsonData.slice().sort((a, b) => new Date(b.timeline.start) - new Date(a.timeline.start));
     // console.log( 'jsonData', jsonData)
     // console.log( 'sortedJsonData', sortedJsonData)
 
@@ -38,8 +38,6 @@ const init = {
 function gitReducer(state, action) {
     switch (action.type) {
         case "FETCH_SUCCESS":
-            console.log(action.data)
-
             return {
                 ...state,
                 loading: false,
@@ -59,7 +57,9 @@ function gitReducer(state, action) {
 }
 
 export function GitProvider({ children }) {
+    const location = useLocation();
     const [gitState, gitDispatch] = useReducer(gitReducer, init);
+    const [currentData, setCurrentData] = useState();
 
     useEffect(() => {
         getGitAPI()
@@ -70,6 +70,19 @@ export function GitProvider({ children }) {
                 gitDispatch({ type: "FETCH_ERROR", data: error });
             });
     }, []);
+
+    useEffect(() => {
+        const replacedPath = location.pathname.startsWith("/details/") ? location.pathname.replace("/details/", "") : '0';
+        // setCurrentData(()=>{
+        //     gitState.dat.find((val) => val.id === location.pathname.replace('/details/', ''))
+        // })
+        // if(replacedPath) {
+        //     const test = gitState.data && gitState.data.find(val => val);
+        //     console.log(test)
+        // }
+
+        console.log(replacedPath)
+    }, [location, gitState]);
 
     return <GitContext.Provider value={{ gitState, gitDispatch }}>{children}</GitContext.Provider>;
 }

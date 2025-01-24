@@ -6,9 +6,21 @@ import HomeListContainer from "./HomeList_styled";
 export default function HomeList({ gitState: { loading, data, error } }) {
     return (
         <HomeListContainer>
-            <ul>
-                <li>{data && <Link to={`/details/${data[0].id}`}>{data[0].title}</Link>}</li>
-            </ul>
+            {loading && "로딩"}
+            {error && "에러"}
+
+
+            {data &&
+                <ul>
+                    {data.map((val, idx)=>(
+                        <li key={idx}>
+                            <Link to={`/details/${val.id}`}>
+                                {val.title}
+                            </Link>
+                        </li>
+                    ))}
+                </ul>
+            }
         </HomeListContainer>
     );
 }
@@ -16,13 +28,7 @@ export default function HomeList({ gitState: { loading, data, error } }) {
 HomeList.propTypes = {
     gitState: PropTypes.shape({
         loading: PropTypes.bool,
-        data: PropTypes.oneOfType([
-            PropTypes.array, 
-            PropTypes.oneOf([null])
-        ]),
-        error: PropTypes.oneOfType([
-            PropTypes.bool, 
-            PropTypes.object
-        ]),
+        data: PropTypes.oneOfType([PropTypes.array, PropTypes.oneOf([null])]),
+        error: PropTypes.oneOfType([PropTypes.bool, PropTypes.object]),
     }),
 };

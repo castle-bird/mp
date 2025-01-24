@@ -7,11 +7,11 @@ import GlobalStyle from "./global/GlobalStyle.jsx";
 import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
-    <GitProvider>
-        <BrowserRouter>
+    <BrowserRouter>
+        <GitProvider>
             <Meta />
             <GlobalStyle />
             <App />
-        </BrowserRouter>
-    </GitProvider>
+        </GitProvider>
+    </BrowserRouter>
 );
