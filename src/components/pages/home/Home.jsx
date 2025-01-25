@@ -6,12 +6,12 @@ import HomeList from "./HomeList/HomeList";
 import HomeView from "./HomeView/HomeView";
 
 export default function Home() {
-    const { gitState, gitDispatch } = useContext(GitContext);
+    const { gitState, currentData } = useContext(GitContext);
 
     return (
         <HomeContainer>
-            <HomeList gitState={gitState} gitDispatch={gitDispatch} />
-            <HomeView gitState={gitState} gitDispatch={gitDispatch} />
+            <HomeList gitState={gitState} />
+            <HomeView currentData={currentData} />
         </HomeContainer>
     );
 }

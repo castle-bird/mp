@@ -4,6 +4,18 @@ import properties from "../../../global/GlobalStyleVar";
 import logo from "../../../images/layout/logo.svg";
 
 const HeaderContainer = styled.header`
+    position: relative;
+
+    &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background-color: ${properties.colors.gray};
+    }
+
     .header-wrap {
         display: flex;
         justify-content: space-between;

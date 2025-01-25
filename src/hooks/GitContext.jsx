@@ -13,13 +13,20 @@ async function getGitAPI() {
         },
     };
 
-    const response = await axios.get("https://api.github.com/repos/castle-bird/myApi/contents/api.json", config);
+    const response = await axios.get(
+        "https://api.github.com/repos/castle-bird/myApi/contents/api.json",
+        config
+    );
     const data = response.data;
     const decodedBase64 = atob(data.content); // Base64로 디코딩된 문자열
-    const decodedContent = new TextDecoder("utf-8").decode(Uint8Array.from(decodedBase64, (c) => c.charCodeAt(0)));
+    const decodedContent = new TextDecoder("utf-8").decode(
+        Uint8Array.from(decodedBase64, (c) => c.charCodeAt(0))
+    );
     const jsonData = JSON.parse(decodedContent);
 
-    const sortedJsonData = jsonData.slice().sort((a, b) => new Date(b.timeline.start) - new Date(a.timeline.start));
+    const sortedJsonData = jsonData
+        .slice()
+        .sort((a, b) => new Date(b.timeline.start) - new Date(a.timeline.start));
     // console.log( 'jsonData', jsonData)
     // console.log( 'sortedJsonData', sortedJsonData)
 
@@ -38,6 +45,7 @@ const init = {
 function gitReducer(state, action) {
     switch (action.type) {
         case "FETCH_SUCCESS":
+            console.log(action.data)
             return {
                 ...state,
                 loading: false,
@@ -72,19 +80,32 @@ export function GitProvider({ children }) {
     }, []);
 
     useEffect(() => {
-        const replacedPath = location.pathname.startsWith("/details/") ? location.pathname.replace("/details/", "") : '0';
-        // setCurrentData(()=>{
-        //     gitState.dat.find((val) => val.id === location.pathname.replace('/details/', ''))
-        // })
-        // if(replacedPath) {
-        //     const test = gitState.data && gitState.data.find(val => val);
-        //     console.log(test)
-        // }
+        // 처음에 data가 세팅 안됏을 때 리턴
+        if(gitState.data === null) return
 
-        console.log(replacedPath)
+        // url이 /details/:id인지 아닌지 체크
+        // 맞으면 id 리턴
+        // 아니면 '' 
+        const replacedPath = location.pathname.startsWith("/details/")
+            ? location.pathname.replace("/details/", "")
+            : '0';
+
+        // /details/:id 가 아니면 첫 번째를 넘겨준다
+        if(replacedPath === '0') {
+            setCurrentData(gitState.data[0]);
+        }
+
+        // /details/:id 가 맞다면 그에 맞는 페이지 넘겨준다
+        if (replacedPath !== "0" && gitState.data) {
+            setCurrentData(gitState.data.find((v) => v.id === Number(replacedPath)));
+        }
     }, [location, gitState]);
 
-    return <GitContext.Provider value={{ gitState, gitDispatch }}>{children}</GitContext.Provider>;
+    return (
+        <GitContext.Provider value={{ gitState, gitDispatch, currentData }}>
+            {children}
+        </GitContext.Provider>
+    );
 }
 
 GitProvider.propTypes = {

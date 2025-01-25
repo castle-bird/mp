@@ -2,7 +2,13 @@ import styled from "styled-components";
 import properties from "../../../../global/GlobalStyleVar";
 
 const HamburgerContainer = styled.label`
-    display: flex;
+
+    display: none;
+
+    ${properties.mediaQuery.tablet(`
+        display: flex;
+    `)};
+
     align-items: center;
     cursor: pointer;
 

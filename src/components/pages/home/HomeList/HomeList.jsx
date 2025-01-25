@@ -1,26 +1,41 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+import { useEffect, useRef } from "react";
 
 import HomeListContainer from "./HomeList_styled";
 
 export default function HomeList({ gitState: { loading, data, error } }) {
+    const listItems = useRef([]);
+
+    useEffect(() => {
+        listItems.current.length !== 0 && listItems.current[0].classList.add("active");
+    }, [data]);
+
+    const onClick = (e) => {
+        const target = e.currentTarget;
+
+        listItems.current.forEach((v) => v.classList.remove("active"));
+        target.classList.add("active");
+    };
+
     return (
         <HomeListContainer>
             {loading && "로딩"}
             {error && "에러"}
 
-
-            {data &&
+            {data && (
                 <ul>
-                    {data.map((val, idx)=>(
-                        <li key={idx}>
+                    {data.map((val, idx) => (
+                        <li key={idx} onClick={onClick} ref={(el) => (listItems.current[idx] = el)}>
                             <Link to={`/details/${val.id}`}>
-                                {val.title}
+                                <strong>{val.role}</strong>
+                                <h3>{val.title}</h3>
+                                <p>{val.description}</p>
                             </Link>
                         </li>
                     ))}
                 </ul>
-            }
+            )}
         </HomeListContainer>
     );
 }

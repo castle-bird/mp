@@ -8,7 +8,6 @@ const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
         color: inherit;
-
     }
 
     /* 추가 글로벌 CSS */

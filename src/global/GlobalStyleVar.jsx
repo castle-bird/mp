@@ -3,7 +3,7 @@ import { css } from "styled-components";
 // break point (반응형)
 const breakpoints = {
     desktopSmall: "1440px",
-    tablet: "1280px",
+    tablet: "1024px",
     mobile: "768px",
     mobileSmall: "560px",
 };
@@ -37,6 +37,7 @@ const colors = {
     default: "#333333",
     white: "#ffffff",
     gray: "#e8e8e8",
+    gray2: "#999999",
 };
 
 const properties = {
