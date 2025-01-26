@@ -7,7 +7,6 @@ import HomeView from "./HomeView/HomeView";
 
 export default function Home() {
     const { gitState, currentData } = useContext(GitContext);
-
     return (
         <HomeContainer>
             <HomeList gitState={gitState} />

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import properties from "../../../global/GlobalStyleVar";
 
 const HomeContainer = styled.section`
+    position: relative;
     display: flex;
     gap: 0 30px;
     max-width: ${properties.breakpoints.tablet};

@@ -1,9 +1,14 @@
+import PropTypes from "prop-types";
 import HamburgerContainer from "./Hamburger_styled";
 
-export default function Hamburger() {
+export default function Hamburger({hamburgerChecked, setHamburgerChecked}) {
+    const onChange = () =>{
+        setHamburgerChecked(!hamburgerChecked)
+    }
+    
     return (
         <HamburgerContainer>
-            <input type="checkbox" />
+            <input type="checkbox" checked={hamburgerChecked} onChange={onChange}/>
             <svg viewBox="0 0 32 32">
                 <path
                     className="line line-top-bottom"
@@ -13,4 +18,9 @@ export default function Hamburger() {
             </svg>
         </HamburgerContainer>
     );
+}
+
+Hamburger.propTypes = {
+    hamburgerChecked : PropTypes.bool,
+    setHamburgerChecked: PropTypes.func
 }

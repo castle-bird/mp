@@ -45,7 +45,6 @@ const init = {
 function gitReducer(state, action) {
     switch (action.type) {
         case "FETCH_SUCCESS":
-            console.log(action.data)
             return {
                 ...state,
                 loading: false,
@@ -67,7 +66,7 @@ function gitReducer(state, action) {
 export function GitProvider({ children }) {
     const location = useLocation();
     const [gitState, gitDispatch] = useReducer(gitReducer, init);
-    const [currentData, setCurrentData] = useState();
+    const [currentData, setCurrentData] = useState({});
 
     useEffect(() => {
         getGitAPI()
@@ -97,12 +96,12 @@ export function GitProvider({ children }) {
 
         // /details/:id 가 맞다면 그에 맞는 페이지 넘겨준다
         if (replacedPath !== "0" && gitState.data) {
-            setCurrentData(gitState.data.find((v) => v.id === Number(replacedPath)));
+            setCurrentData(gitState.data.find((val) => val.id === Number(replacedPath)));
         }
     }, [location, gitState]);
 
     return (
-        <GitContext.Provider value={{ gitState, gitDispatch, currentData }}>
+        <GitContext.Provider value={{ gitState, gitDispatch, currentData, setCurrentData }}>
             {children}
         </GitContext.Provider>
     );

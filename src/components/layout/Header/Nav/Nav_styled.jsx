@@ -1,12 +1,57 @@
-import styled from "styled-components";
+import styled, {keyframes} from "styled-components";
 import properties from "../../../../global/GlobalStyleVar";
+
+const navShow = keyframes`
+    0% {
+        left: -50vw;
+    }
+
+    100% {
+        left: 0;
+    }
+`;
 
 const NavContainer = styled.nav`
     position: relative;
 
     ${properties.mediaQuery.tablet(`
-        display: none;     
+        display: none;
     `)}
+
+    // 모바일
+    &.mo-show {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        position: fixed;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        width: 50vw;
+        z-index: 1;
+        background-color: ${properties.colors.white};
+        box-shadow: 0 0 8px rgba(0 0 0 / 16%);
+        animation: ${navShow} 0.3s ease-in;
+
+        ul {
+            flex-direction: column;
+            height: max-content;
+
+            li {
+                height: auto;
+                text-align: left;
+
+                a {
+                    padding: 1rem 2rem;
+                    text-align: left;
+                }
+                button {
+                    padding: 1rem 2rem !important;
+                }
+            }  
+        }
+    }
 
     .line {
         position: absolute;
@@ -27,6 +72,22 @@ const NavContainer = styled.nav`
 
         li {
             height: 100%;
+
+            &.more {
+                display: none;
+
+                ${properties.mediaQuery.tablet(`
+                    display: block;
+                `)}
+
+                button {
+                    height: 100%;
+                    background-color: transparent;
+                    padding: 0;
+                    border: none;
+                    cursor: pointer;
+                }
+            }
 
             a {
                 display: flex;
@@ -51,6 +112,7 @@ const NavContainer = styled.nav`
 
                 span {
                     display: flex;
+                    width: 100%;
                     align-items: center;
                     height: 100%;
                 }

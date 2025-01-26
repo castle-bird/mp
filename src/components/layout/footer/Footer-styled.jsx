@@ -17,7 +17,8 @@ const FooterContainer = styled.footer`
 
     .footer-wrap {
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-end;
+        gap: 20px;
         max-width: ${properties.breakpoints.desktopSmall};
         margin: 0 auto;
         align-items: center;
@@ -43,6 +44,7 @@ const FooterContainer = styled.footer`
         }
 
         p {
+            padding-top: 3px;
             color: ${properties.colors.gray2};
         }
     }

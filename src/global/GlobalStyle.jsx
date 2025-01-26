@@ -9,10 +9,14 @@ const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         color: inherit;
     }
+    img {
+        max-width: 100%;
+    }
 
     /* 추가 글로벌 CSS */
     html,
     body,
+    *,
     *::before, 
     *::after  {
         font-family: "Poppins", "Pretendard Variable", Pretendard , sans-serif;
@@ -34,6 +38,28 @@ const GlobalStyle = createGlobalStyle`
         `)}
     }
 
+    // 스크롤바
+    *::-webkit-scrollbar {
+            width: 0.5rem;
+            background-color: ${properties.colors.white};
+        }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: ${properties.colors.gray};
+        border-radius: 1rem;
+    }
+
+    *::-webkit-scrollbar-thumb:hover {
+        cursor: pointer;
+        background-color: ${properties.colors.primary};
+    }
+
+    ${properties.mediaQuery.tablet(`
+        *::-webkit-scrollbar {
+            display: none;
+        }
+    `)};
+
     // 기본 버튼
     .button {
         z-index: 1;
@@ -45,6 +71,7 @@ const GlobalStyle = createGlobalStyle`
         font-weight: 500;
         color: ${properties.colors.primary};
         overflow: hidden;
+        background-color: ${properties.colors.white};
         cursor: pointer;
 
         &::before {

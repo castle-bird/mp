@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import HeaderContainer from "./Header_styled";
 import Nav from "./Nav/Nav";
 import Hamburger from "./Hamburger/Hamburger";
+import { useState } from "react";
 
 export default function Header() {
+    const [hamburgerChecked, setHamburgerChecked] = useState(false);
+
     return (
         <HeaderContainer>
             <div className="header-wrap">
@@ -14,10 +17,10 @@ export default function Header() {
                 </h1>
 
                 {/* 네비 */}
-                <Nav />
+                <Nav hamburgerChecked={hamburgerChecked} setHamburgerChecked={setHamburgerChecked}/>
 
                 {/* 햄버거 */}
-                <Hamburger />
+                <Hamburger hamburgerChecked={hamburgerChecked} setHamburgerChecked={setHamburgerChecked}/>
             </div>
         </HeaderContainer>
     );

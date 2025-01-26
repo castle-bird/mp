@@ -4,6 +4,8 @@ import { useEffect, useRef } from "react";
 
 import HomeListContainer from "./HomeList_styled";
 
+import Loading from "../../../loading/Loading";
+
 export default function HomeList({ gitState: { loading, data, error } }) {
     const listItems = useRef([]);
 
@@ -20,7 +22,7 @@ export default function HomeList({ gitState: { loading, data, error } }) {
 
     return (
         <HomeListContainer>
-            {loading && "로딩"}
+            {loading && <Loading />}
             {error && "에러"}
 
             {data && (
