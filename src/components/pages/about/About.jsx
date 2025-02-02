@@ -10,7 +10,7 @@ export default function About() {
                     <br />
                     퍼블리셔로 일하면서 자연스럽게 <span>JavaScript</span>를 많이 접하게 되었고, 그 활용성과 중요성을 깊이 느껴왔습니다. 
                     <br />
-                    사용자가 편리하게 이용할 수 있는 <span>UI/UX 설계</span>부터, 웹 개발에서 중요한 <span>성능 최적화</span>까지 이 모든 것이 JavaScript로 해결될 수 있다고 생각합니다. 
+                    사용자가 편리하게 이용할 수 있는 <span>UI/UX 설계</span>부터, 웹 개발에서 중요한 <span>성능 최적화</span>까지 이 모든 것이 <span>JavaScript</span>로 해결될 수 있다고 생각합니다. 
                     <br />
                     또한, <span>JavaScript</span>는 웹과 앱에서 모두 활용할 수 있어 그만큼 확장성이 뛰어난 기술입니다. 
                     <br />
