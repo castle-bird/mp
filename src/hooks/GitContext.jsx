@@ -53,13 +53,10 @@ export function GitProvider({ children }) {
     const [gitState, gitDispatch] = useReducer(gitReducer, init);
     const [currentData, setCurrentData] = useState({});
 
-    const [test, setTest] = useState()
-
     useEffect(() => {
         getGitAPI()
             .then((jsonData) => {
                 gitDispatch({ type: "FETCH_SUCCESS", data: jsonData });
-                setTest(jsonData)
             })
             .catch((error) => {
                 gitDispatch({ type: "FETCH_ERROR", data: error });
@@ -91,7 +88,6 @@ export function GitProvider({ children }) {
 
     return (
         <GitContext.Provider value={{ gitState, gitDispatch, currentData, setCurrentData }}>
-            {test && JSON.stringify(test)}
             {children}
         </GitContext.Provider>
     );
